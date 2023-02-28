@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.NumberFormat;
 import java.util.List;
+import java.util.ListIterator;
 
 @Service
 @AllArgsConstructor
@@ -12,23 +13,19 @@ public class EmployeeService implements SalaryCalculatorService,
          EmployeeNotFoundException, EmployeeDTOToEmployeeMapper {
     private EmployeeRepository employeeRepository;
 
-    public String listOfEmployeesAndSalaries() {
 
-        List<Employee> employees = employeeRepository.findAll();
+    public List<Employee> listOfEmployeesAndSalaries() {
 
-        String format = null;
-        for (Employee employee : employees) {
-            NumberFormat currencyInstance = NumberFormat.getCurrencyInstance();
-            format = String.format("Employee: %s %s noOfHoursMonthly: %d salary: %s",
-                   employee.getFirstName(), employee.getLastName(), employee.getNoOfHoursToWork(),
-                    currencyInstance.format(calculateSalary(employee.getNoOfHoursToWork())));
-       }
-       return format;
+        return employeeRepository.findAll();
     }
 
-    public Employee createNewEmployee(EmployeeDTO employeeDTO) {
+    public String createNewEmployee(EmployeeDTO employeeDTO) {
         Employee employee = mapEmployeeDTOToEmployee(employeeDTO);
-        return employeeRepository.save(employee);
+         employeeRepository.save(employee);
+        NumberFormat currencyInstance = NumberFormat.getCurrencyInstance();
+         return String.format("Employee: %s %s noOfHoursMonthly: %d salary: %s",
+                 employee.getFirstName(), employee.getLastName(), employee.getNoOfHoursToWork(),
+                 currencyInstance.format(calculateSalary(employee.getNoOfHoursToWork())));
     }
 
     public Employee findEmployeeById(Long employeeId) {

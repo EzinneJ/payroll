@@ -22,13 +22,13 @@ public class PayrollApplication {
     public CommandLineRunner commandLineRunner() {
         return args -> {
             Employee employee = new Employee("Joy", "Ezinne", 160, 10);
-        employeeRepository.save(employee);
+            employeeRepository.save(employee);
             Employee employee1 = new Employee("Grace", "Solo", 140, 9);
             employeeRepository.save(employee1);
 
         };
-    }
 
+    }
 
 
 }

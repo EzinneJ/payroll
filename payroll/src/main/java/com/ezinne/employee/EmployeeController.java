@@ -12,12 +12,12 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping
-    public String getEmployees() {
+    public List<Employee> getEmployees() {
         return employeeService.listOfEmployeesAndSalaries();
     }
 
     @PostMapping
-    public Employee saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
+    public String saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
         return employeeService.createNewEmployee(employeeDTO);
     }
 
