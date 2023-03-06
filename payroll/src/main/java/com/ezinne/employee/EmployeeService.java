@@ -5,14 +5,12 @@ import org.springframework.stereotype.Service;
 
 import java.text.NumberFormat;
 import java.util.List;
-import java.util.ListIterator;
 
 @Service
 @AllArgsConstructor
 public class EmployeeService implements SalaryCalculatorService,
          EmployeeNotFoundException, EmployeeDTOToEmployeeMapper {
     private EmployeeRepository employeeRepository;
-
 
     public List<Employee> listOfEmployeesAndSalaries() {
 
